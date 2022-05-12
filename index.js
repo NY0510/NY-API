@@ -8,8 +8,8 @@ app.use(express.urlencoded({ extended: true }));
 
 const port = config.port || 3000;
 
-// const main = require("./routes/main");
-// app.use("/", main);
+const main = require("./routes/main");
+app.use("/", main);
 
 const nsfw = require("./routes/api/v1/nsfw");
 app.use("/nsfw", nsfw);
