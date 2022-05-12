@@ -16,9 +16,9 @@ module.exports.success = (type, startTime, endTime, ...args) => {
 				successMessage: config.message.success.imageLoaded.text,
 				code: Number(config.message.success.imageLoaded.code),
 				time: endTime - startTime,
-				imageUrl: args[0],
+				url: args[0],
+				categorie: args[2],
 				imageType: args[1],
-				imageCategorie: args[2],
 			};
 			break;
 	}

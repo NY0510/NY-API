@@ -9,9 +9,16 @@ const crypto = require("crypto");
 const fs = require("fs");
 
 router.get("/", (req, res) => {
+	const query = req.query;
 	const start = new Date();
 	const categorieList = ["waifu", "neko", "trap", "blowjob"];
-	const categorie = categorieList[Math.floor(Math.random() * categorieList.length)];
+	let categorie;
+
+	if (categorieList.includes(query.categorie)) {
+		categorie = query.categorie;
+	} else {
+		categorie = categorieList[Math.floor(Math.random() * categorieList.length)];
+	}
 
 	request({ url: `https://api.waifu.pics/nsfw/${categorie}`, json: true }, (error, response, body) => {
 		const fileUrl = body.url;
@@ -19,6 +26,7 @@ router.get("/", (req, res) => {
 		if (error) {
 			const data = crcreateJson.error((type = "failedToGetImage"), (startTime = start), (endTime = new Date()));
 			res.json(data);
+			console.log(`Error: 이미지 불러오는중 오류 발생 | ${__filename} - ${error}`);
 		} else {
 			const data = crcreateJson.success(
 				(type = "imageLoaded"),
@@ -30,17 +38,6 @@ router.get("/", (req, res) => {
 			);
 			res.json(data);
 		}
-		// const fileExt = body.url.split(".").pop();
-		// const fileName = body.url.split("/").pop().replace(`.${fileExt}`, "");
-		// const hashedName = crypto.createHash("md5").update(fileName).digest("hex");
-		// const filePath = path.join(__dirname, "../../../", "data", "image", `${hashedName}.${fileExt}`);
-
-		// console.log(body.url);
-		// const writeStream = fs.createWriteStream(filePath);
-		// request.get(body.url).pipe(writeStream);
-		// writeStream.on("finish", () => {
-		// 	res.sendFile(filePath);
-		// });
 	});
 });
 
