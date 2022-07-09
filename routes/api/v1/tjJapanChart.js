@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const config = require("../../../modules/env");
 const crcreateJson = require("../../../modules/json");
 
 const cheerio = require("cheerio");
