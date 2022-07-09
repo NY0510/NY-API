@@ -1,12 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const path = require("path");
-const config = require("../../../modules/env");
 const crcreateJson = require("../../../modules/json");
 
 const request = require("request");
-const crypto = require("crypto");
-const fs = require("fs");
 
 router.get("/", (req, res) => {
 	const query = req.query;
@@ -24,12 +20,12 @@ router.get("/", (req, res) => {
 		const fileUrl = body.url;
 
 		if (error) {
-			const data = crcreateJson.error((type = "failedToGetImage"), (startTime = start), (endTime = new Date()));
+			const data = crcreateJson.error((type = "nsfw"), (startTime = start), (endTime = new Date()));
 			res.json(data);
 			console.log(`Error: 이미지 불러오는중 오류 발생 | ${__filename} - ${error}`);
 		} else {
 			const data = crcreateJson.success(
-				(type = "imageLoaded"),
+				(type = "nsfw"),
 				(startTime = start),
 				(endTime = new Date()),
 				(imageurl = fileUrl),

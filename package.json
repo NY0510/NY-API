@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/NY0510/NY-API#readme",
   "dependencies": {
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.11",
     "dotenv": "^16.0.0",
     "express": "^4.18.1",
     "request": "^2.88.2"
