@@ -44,13 +44,14 @@ None
 
 ### Response (JSON)
 
-|   Key    |  Type  | Description                     |
-| :------: | :----: | ------------------------------- |
-| message  | String | 요청 처리 결과                  |
-|   code   | String | 성공 시 Success / 실패 시 Error |
-| startDay | String | 차트 범위 시작일 (YY-M-D)       |
-|  endDay  | String | 차트 범위 종료일 (YY-M-D)       |
-|   data   | Array  | 차트 데이터 (1위 ~ 100위)       |
+|   Key    |  Type  | Description                      |
+| :------: | :----: | -------------------------------- |
+| message  | String | 요청 처리 결과                   |
+|   code   | String | 성공 시 Success / 실패 시 Error  |
+|   time   | Number | 요청을 처리하는데 걸린 시간 (ms) |
+| startDay | String | 차트 범위 시작일 (YY-M-D)        |
+|  endDay  | String | 차트 범위 종료일 (YY-M-D)        |
+|   data   | Array  | 차트 데이터 (1위 ~ 100위)        |
 
 ```json
 {
