@@ -52,7 +52,9 @@ router.get("/", (req, res) => {
 			(country = country),
 			(jsonData = charatData)
 		);
-		res.json(data);
+		setTimeout(() => {
+			res.json(data);
+		}, 5000);
 	});
 });
 

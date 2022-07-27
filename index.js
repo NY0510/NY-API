@@ -1,5 +1,6 @@
 const express = require("express");
-const app = express();
+const asyncify = require("express-asyncify");
+const app = asyncify(express());
 const path = require("path");
 const config = require(path.join(__dirname, "modules", "env.js"));
 
