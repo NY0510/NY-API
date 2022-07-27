@@ -14,10 +14,10 @@ router.get("/", (req, res) => {
 	let type;
 
 	if (country === undefined) {
-		return res.json(createJson.error((type = "tjChart"), (startTime = start), (endTime = new Date()), (message = "NO_COUNTRY_PARAMETER")));
+		return res.status(400).json(createJson.error((type = "tjChart"), (startTime = start), (endTime = new Date()), (message = "NO_COUNTRY_PARAMETER")));
 	}
 	if (country != "kr" && country != "jp") {
-		return res.json(createJson.error((type = "tjChart"), (startTime = start), (endTime = new Date()), (message = "INVALID_COUNTRY_PARAMETER")));
+		return res.status(400).json(createJson.error((type = "tjChart"), (startTime = start), (endTime = new Date()), (message = "INVALID_COUNTRY_PARAMETER")));
 	}
 
 	if (country === "kr") type = "1";
@@ -28,7 +28,7 @@ router.get("/", (req, res) => {
 	request({ url: baseUrl }, (error, response, body) => {
 		if (error) {
 			const data = createJson.error("tjChart", start, new Date());
-			res.json(data);
+			res.status(500).json(data);
 		}
 
 		let $ = cheerio.load(body);

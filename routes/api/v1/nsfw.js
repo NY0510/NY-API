@@ -21,8 +21,7 @@ router.get("/", (req, res) => {
 
 		if (error) {
 			const data = createJson.error((type = "nsfw"), (startTime = start), (endTime = new Date()));
-			res.json(data);
-			console.log(`Error: 이미지 불러오는중 오류 발생 | ${__filename} - ${error}`);
+			res.status(500).json(data);
 		} else {
 			const data = createJson.success(
 				(type = "nsfw"),
