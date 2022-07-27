@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const crcreateJson = require("../../../modules/json");
+const createJson = require("../../../modules/json");
 
 const cheerio = require("cheerio");
 const request = require("request");
@@ -28,7 +28,7 @@ router.get("/", (req, res) => {
 				singer = String($(element).find("td:nth-of-type(4)").text());
 				if (no != "" || songNumber != "" || title != "" || singer != "") charatData.push({ no: no, songNumber: songNumber, title: title, singer: singer });
 			});
-		const data = crcreateJson.success(
+		const data = createJson.success(
 			(type = "tjJapanChart"),
 			(startTime = start),
 			(endTime = new Date()),

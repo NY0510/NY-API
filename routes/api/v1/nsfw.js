@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const crcreateJson = require("../../../modules/json");
+const createJson = require("../../../modules/json");
 
 const request = require("request");
 
@@ -20,11 +20,11 @@ router.get("/", (req, res) => {
 		const fileUrl = body.url;
 
 		if (error) {
-			const data = crcreateJson.error((type = "nsfw"), (startTime = start), (endTime = new Date()));
+			const data = createJson.error((type = "nsfw"), (startTime = start), (endTime = new Date()));
 			res.json(data);
 			console.log(`Error: 이미지 불러오는중 오류 발생 | ${__filename} - ${error}`);
 		} else {
-			const data = crcreateJson.success(
+			const data = createJson.success(
 				(type = "nsfw"),
 				(startTime = start),
 				(endTime = new Date()),
