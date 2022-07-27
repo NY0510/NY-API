@@ -26,5 +26,10 @@ fs.readdirSync(path.join(__dirname, "routes", "api", `v${apiVersion}`)).forEach(
 });
 
 app.listen(port, () => {
-	console.log(`Server is running on port ${port}!\n\nhttp://localhost:${port}\nhttp://127.0.0.1:${port}`);
+	console.log(`
+Server is running on port ${port}!
+
+http://localhost:${port}
+http://127.0.0.1:${port}
+	`);
 });
