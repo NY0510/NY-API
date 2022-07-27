@@ -27,7 +27,7 @@ router.get("/", (req, res) => {
 
 	request({ url: baseUrl }, (error, response, body) => {
 		if (error) {
-			const data = createJson.error("tjChart", start, new Date());
+			const data = createJson.error((type = "tjChart"), (startTime = start), (endTime = new Date()), (message = "FAIL_TO_GET_DATA"));
 			res.status(500).json(data);
 		}
 
