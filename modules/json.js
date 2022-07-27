@@ -1,8 +1,10 @@
-module.exports.error = (type, startTime, endTime) => {
+module.exports.error = (type, startTime, endTime, ...args) => {
 	switch (type) {
 		case "nsfw":
 			return { message: "FAIL_TO_GET_IMAGE", code: "Error", time: endTime - startTime };
 			break;
+		case "tjChart":
+			return { message: "FAIL_TO_GET_DATA", code: "Error", time: endTime - startTime, message: args[0] };
 	}
 };
 
@@ -18,14 +20,15 @@ module.exports.success = (type, startTime, endTime, ...args) => {
 				imageType: args[1],
 			};
 			break;
-		case "tjJapanChart":
+		case "tjChart":
 			return {
 				message: "DATA_LOADED_SUCCESSFULLY",
 				code: "Success",
 				time: endTime - startTime,
 				startDay: args[0],
 				endDay: args[1],
-				data: args[2],
+				country: args[2],
+				data: args[3],
 			};
 			break;
 	}

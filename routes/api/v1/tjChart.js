@@ -8,13 +8,28 @@ const request = require("request");
 const month = new Date().getMonth() + 1;
 const year = new Date().getFullYear();
 
-const baseUrl = `https://www.tjmedia.com/tjsong/song_monthPopular.asp?strType=3&SYY=${year}&SMM=${month - 1}&SDD=01&EYY=${year}&EMM=${month}&EDD=01`;
-
 router.get("/", (req, res) => {
 	const start = new Date();
+	let country = req.query.country;
+	let type;
+
+	if (country === undefined) {
+		return res.json(createJson.error((type = "tjChart"), (startTime = start), (endTime = new Date()), (message = "NO_COUNTRY_PARAMETER")));
+	}
+	if (country != "kr" && country != "jp") {
+		return res.json(createJson.error((type = "tjChart"), (startTime = start), (endTime = new Date()), (message = "INVALID_COUNTRY_PARAMETER")));
+	}
+
+	if (country === "kr") type = "1";
+	if (country === "jp") type = "3";
+
+	const baseUrl = `https://www.tjmedia.com/tjsong/song_monthPopular.asp?strType=${type}&SYY=${year}&SMM=${month - 1}&SDD=01&EYY=${year}&EMM=${month}&EDD=01`;
 
 	request({ url: baseUrl }, (error, response, body) => {
-		if (error) throw error;
+		if (error) {
+			const data = createJson.error("tjChart", start, new Date());
+			res.json(data);
+		}
 
 		let $ = cheerio.load(body);
 
@@ -29,11 +44,12 @@ router.get("/", (req, res) => {
 				if (no != "" || songNumber != "" || title != "" || singer != "") charatData.push({ no: no, songNumber: songNumber, title: title, singer: singer });
 			});
 		const data = createJson.success(
-			(type = "tjJapanChart"),
+			(type = "tjChart"),
 			(startTime = start),
 			(endTime = new Date()),
 			(startDay = `${year}-${month - 1}-1`),
 			(endDay = `${year}-${month}-1`),
+			(country = country),
 			(jsonData = charatData)
 		);
 		res.json(data);
