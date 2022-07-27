@@ -31,7 +31,7 @@ router.get("/", (req, res) => {
 				(imageType = fileUrl.split(".").pop()),
 				(imageCategorie = categorie)
 			);
-			res.json(data);
+			res.set("Cache-Control", "no-cache").json(data);
 		}
 	});
 });
