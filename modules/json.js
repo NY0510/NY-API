@@ -1,6 +1,3 @@
-const path = require("path");
-const config = require("./env");
-
 module.exports.error = (type, startTime, endTime) => {
 	switch (type) {
 		case "nsfw":
